@@ -5,6 +5,7 @@ import "github.com/gofiber/fiber/v2"
 type Router struct {
 	App               *fiber.App
 	ProductController *ProductController
+	AuthMiddleware    fiber.Handler
 }
 
 type router interface {
@@ -13,10 +14,11 @@ type router interface {
 	registerPrivateEndpoints()
 }
 
-func NewRouter(app *fiber.App, productController *ProductController) router {
+func NewRouter(app *fiber.App, productController *ProductController, authMiddleware fiber.Handler) router {
 	return &Router{
 		App:               app,
 		ProductController: productController,
+		AuthMiddleware:    authMiddleware,
 	}
 }
 
@@ -28,7 +30,12 @@ func (r *Router) Setup() {
 
 // registerPrivateEndpoints implements router.
 func (r *Router) registerPrivateEndpoints() {
-
+	r.App.Use(r.AuthMiddleware)
+	r.App.Get("/secrit", func(ctx *fiber.Ctx) error {
+		return ctx.JSON(fiber.Map{
+			"message": "This is a secret endpoint",
+		})
+	})
 }
 
 // registerPublicEndpoints implements router.

@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/adepuu/tokopaedi-backend/internal/delivery/http"
+	"github.com/adepuu/tokopaedi-backend/internal/delivery/http/middleware"
 	"github.com/adepuu/tokopaedi-backend/internal/repository"
 	"github.com/adepuu/tokopaedi-backend/internal/usecase"
 	"github.com/gofiber/fiber/v2"
@@ -27,9 +28,13 @@ func (cfg *AppConfig) Run() {
 	// setup controller
 	productController := http.NewProductController(&productUseCase, cfg.Log)
 
+	// setup middleware
+	authMiddleware := middleware.NewAuth()
+
 	routeConfig := http.Router{
 		App:               cfg.App,
 		ProductController: productController,
+		AuthMiddleware:    authMiddleware,
 	}
 	routeConfig.Setup()
 }
