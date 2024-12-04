@@ -1,0 +1,9 @@
+services:
+  postgres:
+    container_name: tokopaedi-main-db
+    image: postgres:alpine
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - ${POSTGRES_PORT}:5432
