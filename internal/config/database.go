@@ -12,9 +12,9 @@ import (
 )
 
 func NewDatabase(viper *viper.Viper, log *logrus.Logger) *gorm.DB {
-	idleConnection := viper.GetInt("database.pool.idle")
-	maxConnection := viper.GetInt("database.pool.max")
-	maxLifeTimeConnection := viper.GetInt("database.pool.lifetime")
+	idleConnection := viper.GetInt("POSTGRES_IDLE_CONNECTION")
+	maxConnection := viper.GetInt("POSTGRES_MAX_CONNECTION")
+	maxLifeTimeConnection := viper.GetInt("POSTGRES_MAX_LIFETIME_CONNECTION")
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		viper.GetString("POSTGRES_HOST"),
