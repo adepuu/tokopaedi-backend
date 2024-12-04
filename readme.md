@@ -12,16 +12,16 @@ This project is for fun. It is written in Go, using GORM for ORM, Fiber for the 
 
 1. Clone the repository:
 
-    ```sh
-    git clone https://github.com/adepuu/tokopaedi-backend.git
-    cd tokopaedi-backend
-    ```
+   ```sh
+   git clone https://github.com/adepuu/tokopaedi-backend.git
+   cd tokopaedi-backend
+   ```
 
 2. Copy the `.env.example` file to `.env` and adjust the environment variables if necessary:
 
-    ```sh
-    cp .env.example .env
-    ```
+   ```sh
+   cp .env.example .env
+   ```
 
 ### .env Example
 
@@ -37,21 +37,27 @@ This project is for fun. It is written in Go, using GORM for ORM, Fiber for the 
 
 3. Start the PostgreSQL database using Docker Compose:
 
-    ```sh
-    docker-compose up -d
-    ```
+   ```sh
+   docker-compose up -d
+   ```
 
 4. Install the Go dependencies:
 
-    ```sh
-    go mod tidy
-    ```
+   ```sh
+   go mod tidy
+   ```
 
-5. Run the application:
+5. Run Migration
 
-    ```sh
-    go run main.go
-    ```
+   ```shell
+   migrate -database "postgres://admin:admin@0.0.0.0:5433/postgres?sslmode=disable" -path db/migrations up
+   ```
+
+6. Run the application:
+
+   ```sh
+   go run main.go
+   ```
 
 ## Project Structure
 
