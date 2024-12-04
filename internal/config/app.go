@@ -21,16 +21,12 @@ type AppConfig struct {
 func (cfg *AppConfig) Run() {
 	// setup repositories
 	productRepository := repository.NewProductRepository(cfg.Log)
-
 	// setup use cases
 	productUseCase := usecase.NewProductUsecase(productRepository, cfg.Log, cfg.DB)
-
 	// setup controller
 	productController := http.NewProductController(&productUseCase, cfg.Log)
-
 	// setup middleware
 	authMiddleware := middleware.NewAuth()
-
 	routeConfig := http.Router{
 		App:               cfg.App,
 		ProductController: productController,
