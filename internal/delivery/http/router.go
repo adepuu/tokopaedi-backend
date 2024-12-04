@@ -13,9 +13,10 @@ type router interface {
 	registerPrivateEndpoints()
 }
 
-func NewRouter(app *fiber.App) router {
+func NewRouter(app *fiber.App, productController *ProductController) router {
 	return &Router{
-		App: app,
+		App:               app,
+		ProductController: productController,
 	}
 }
 

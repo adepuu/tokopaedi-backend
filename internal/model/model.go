@@ -1,10 +1,11 @@
 package model
 
 type WebResponse[T any] struct {
-	Data    T             `json:"data"`
-	Paging  *PageMetadata `json:"paging,omitempty"`
-	Message string        `json:"message,omitempty"`
-	Success bool          `json:"success"`
+	Data    T      `json:"data"`
+	Message string `json:"message,omitempty"`
+	Success bool   `json:"success"`
+	// Paging is optional
+	Paging *PageMetadata `json:"paging,omitempty"`
 }
 
 type PageMetadata struct {
